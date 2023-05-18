@@ -6,8 +6,8 @@ class DataExtractor:
     def read_rds_table(self, connect, table_name):
             engine = connect.init_db_engine()
             users = pd.read_sql_query(f'''SELECT * FROM {table_name}''', engine).set_index('index')
+            print(users.columns)
             return users
     
 data_1 = DataExtractor()
 data_2 = DatabaseConnector()
-print(data_1.read_rds_table(data_2, 'legacy_users'))
