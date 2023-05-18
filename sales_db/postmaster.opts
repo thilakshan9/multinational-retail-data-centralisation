@@ -1,0 +1,1 @@
+/usr/local/Cellar/postgresql@14/14.7/bin/postgres "-D" "sales_db"
