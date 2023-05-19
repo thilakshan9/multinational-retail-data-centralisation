@@ -25,9 +25,9 @@ class DatabaseConnector:
         engine = self.init_db_engine()
         inspector = inspect(engine)
         return inspector.get_table_names()
-    def upload_to_db(self, users, table_name):
+    def upload_to_db(self, df, table_name):
         sales_engine = create_engine(f"{'postgresql'}+{'psycopg2'}://{'postgres'}:{'12345'}@{'localhost'}:{'5432'}/{'sales_data'}")
-        users.to_sql(table_name, sales_engine, if_exists='replace')
+        df.to_sql(table_name, sales_engine, if_exists='replace')
 
 if __name__ == "__main__":
     connect = DatabaseConnector()
