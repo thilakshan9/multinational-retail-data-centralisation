@@ -6,43 +6,37 @@ class DataCleaning:
     def __init__(self):
         pass
     def clean_user_data(self, users):
-        # Checking for any overall null values
+        # Checking for any overall null values - none present
         print(f"Total null values in the dataframe are : {users.isna().sum().sum()}")
+        # Printing the data types to see if they are of the right type
         print(users.dtypes)
         users['country'] = users['country'].astype('category')
         users['country_code'] = users['country_code'].astype('category')
-        print(users[users['date_of_birth'].str.match('[0-9]{4}-[0-9]{2}-[0-9]{2}')== False])
-        print(users.loc[360,'date_of_birth'])
-        print(users.head())
         users['date_of_birth'] = pd.to_datetime(users['date_of_birth'], infer_datetime_format=True, errors='coerce')
         users = users.dropna(subset=['date_of_birth'])
-        users = users.reset_index(drop=True)
         users['join_date'] = pd.to_datetime(users['join_date'], infer_datetime_format=True, errors='coerce')
         users = users.dropna(subset=['join_date'])
         users = users.reset_index(drop=True)
-        print(f"Duplicaed is {users.duplicated(subset=['phone_number'],keep=False).sum()}")
-        print(users[users.duplicated(subset='phone_number',keep=False)])
-        print(users[users['country_code']=='GGB'])
+        # More than one person cannot have the same number - duplicates recognised via subset - kept the first instance and deleted others
+        users = users.set_index('join_date')
+        users = users.sort_index(ascending=True)
+        print(f"Joined {users}")
+        duplicated_phone = users.duplicated(subset=['phone_number'], keep = 'first')
+        users = users[~duplicated_phone]
+        users = users.reset_index()
+        print(users)
+        # Replacing GGB with GB - inferring
         users['country_code'] = users['country_code'].replace({'GGB':'GB'})
-        print(users[users['country_code']=='GGB'])
         users['address'] = users['address'].str.replace("\n"," ").str.replace("\\","").str.replace("/","")
-        print(users['country'].unique())
-        # Checking the email address are all in the correct format
+        # Used the following to get the domain name extensions
         domain = users['email_address'].apply(lambda x: x.split('@')[1])
         domain = domain.apply(lambda x: x.split('.',1)[-1])
-        print(domain.unique())
-        print(users[~users['email_address'].str.contains('@')].shape[0])
+        # Emails must contain @ and domain name extension
         users = users[users['email_address'].str.contains('@')]
-        print(users[~users['email_address'].str.contains('.co.uk|.com|.de|.org|.info|.net|.biz')].shape[0])
-        print(users[users['email_address'].str.contains('.co.uk|.com|.de|.org|.info|.net|.biz')])
-        print(f"Address is {users['address']}")
-        address_check = users['address'].apply(lambda x: x.split('\n'))
-        print(address_check)
-        users['phone_raw'] = users['phone_number'].str.replace('\W', '', regex=True)
-        users = users[users['phone_raw'].str.isnumeric()]
+        users = users[users['email_address'].str.contains('.co.uk|.com|.de|.org|.info|.net|.biz')]
+        # users['phone_raw'] = users['phone_number'].str.replace('\W', '', regex=True)
+        # users = users[users['phone_raw'].str.isnumeric()]
         users = users.reset_index(drop=True)
-        print(users)
-        # print(users.loc[360, 'date_of_birth'])
         return users
 
 data_2 = DatabaseConnector()
