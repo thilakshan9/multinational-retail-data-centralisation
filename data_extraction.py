@@ -1,4 +1,4 @@
-from database_utils import DatabaseConnector
+# from database_utils import DatabaseConnector
 import pandas as pd
 class DataExtractor:
     def __init__(self):
@@ -9,5 +9,3 @@ class DataExtractor:
             print(users.columns)
             return users
     
-data_1 = DataExtractor()
-data_2 = DatabaseConnector()

@@ -1,5 +1,7 @@
 import yaml
 from sqlalchemy import create_engine, inspect
+from data_cleaning import DataCleaning
+from data_extraction import DataExtractor
 
 class DatabaseConnector:
     def __init__(self):
@@ -23,7 +25,16 @@ class DatabaseConnector:
         engine = self.init_db_engine()
         inspector = inspect(engine)
         return inspector.get_table_names()
+    def upload_to_db(self, users, table_name):
+        sales_engine = create_engine(f"{'postgresql'}+{'psycopg2'}://{'postgres'}:{'12345'}@{'localhost'}:{'5432'}/{'sales_data'}")
+        users.to_sql(table_name, sales_engine, if_exists='replace')
 
-obj_1 = DatabaseConnector()
-print(obj_1.list_db_tables())
+if __name__ == "__main__":
+    connect = DatabaseConnector()
+    obj_2 = DataCleaning()
+    obj_3 = DataExtractor()
+    print(connect.list_db_tables())
+    users = obj_3.read_rds_table(connect, 'legacy_users')
+    users = obj_2.clean_user_data(users)
+    print(connect.upload_to_db(users, 'dim_users'))
 
