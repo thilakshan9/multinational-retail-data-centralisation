@@ -38,8 +38,11 @@ if __name__ == "__main__":
     # connect.upload_to_db(card, 'dim_card_details')
     # stores_data = obj_3.retrieve_stores_data('https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/store_details/%7Bstore_number%7D')
     # stores_data = obj_2.called_clean_store_date(stores_data)
+    # connect.upload_to_db(stores_data, 'dim_store_details')
     # print(connect.list_db_tables())
-    users = obj_3.read_rds_table(connect, 'legacy_users')
-    users = obj_2.clean_user_data(users)   
+    # users = obj_3.read_rds_table(connect, 'legacy_users')
+    # users = obj_2.clean_user_data(users)   
     # print(connect.upload_to_db(users, 'dim_users'))
+    data = obj_3.extractfroms3()
+    obj_2.convert_product_weights(data)
 
