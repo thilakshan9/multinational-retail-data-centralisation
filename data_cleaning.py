@@ -59,20 +59,48 @@ class DataCleaning:
     def convert_product_weights(self, df):
         def convert_to_kg(value):
             try:
-                if 'g' in str(value):
-                    grams = float(value.replace('g', ''))
+                if str(value)[-2:] == 'kg':
+                    kilograms = float(str(value).replace('kg', ''))
+                    return kilograms
+                elif str(value)[-1] == 'g':
+                    grams = float(str(value).replace('g', ''))
                     kilograms = grams / 1000
-                    return f'{kilograms}kg'
+                    return kilograms
                 elif 'ml' in str(value):
-                    milliliters = float(value.replace('ml', ''))
+                    milliliters = float(str(value).replace('ml', ''))
                     kilograms = milliliters / 1000
-                    return f'{kilograms}kg'
+                    return kilograms
                 else:
                     return value
             except ValueError:
                 return value
         df['weight'] = df['weight'].apply(convert_to_kg)
         df.to_string('cleaned_productdata.csv')
+        return df
+    def clean_products_data(self, df):
+        print(df[df.duplicated(subset=['product_name','weight'], keep=False)])
+        date_added= pd.to_datetime(df['date_added'], format='%Y-%m-%d',errors='coerce')
+        df['date_added']= date_added.fillna(pd.to_datetime(df['date_added'], format='%Y %B %d', errors='coerce'))
+        df = df.dropna(subset='date_added')
+        df = df.sort_values(by='date_added', ascending=True)
+        df = df.drop_duplicates(subset=['product_name','weight'], keep='first')
+        df.to_string('cleaned_products.csv')
+        return df
+
+    def clean_orders_data(self, df):
+        df.to_string('uncleaned_orders.txt')
+        df = df.drop(columns=['first_name', 'last_name', '1'])
+        df.to_string('cleaned_orders.txt')
+        return df
+    def clean_dates_data(self,df):
+        df.to_string('unclean_dates.csv')
+        print(df['month'].isna())
+        print(df['year'].isna())
+        print(df['day'].isna())
+        print(df['time_period'].unique())
+        df=df[df['time_period'].isin(['Evening','Morning','Midday','Late_Hours'])]
+        print(df['time_period'].unique())
+        return df
 
 
 

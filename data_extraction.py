@@ -42,6 +42,10 @@ class DataExtractor:
          products = pd.read_csv('s3_extracted.csv')
          products.to_string('product_unclean.csv')
          return products
+    def extract_dates(self):
+         api_fetch = requests.get('https://data-handling-public.s3.eu-west-1.amazonaws.com/date_details.json')
+         return pd.DataFrame(api_fetch.json())
+         
          
 obj_1 = DataExtractor()
 # data  = obj_1.retrieve_pdf_data('https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details.pdf')
