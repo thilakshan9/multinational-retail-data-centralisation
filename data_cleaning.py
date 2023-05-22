@@ -49,6 +49,7 @@ class DataCleaning:
         df['continent'] = df['continent'].replace({'eeAmerica':'America', 'eeEurope':'Europe'})
         df=df[df['continent'].isin(['America','Europe'])]
         print(df['continent'].unique())
+        df['staff_numbers'] = df['staff_numbers'].str.replace('[a-zA-Z]', '', regex=True)
         df['opening_date'].to_string('date.txt')
         opening_date = pd.to_datetime(df['opening_date'], format='%Y-%m-%d',errors='coerce')
         opening_date= opening_date.fillna(pd.to_datetime(df['opening_date'], format='%B %Y %d', errors='coerce'))
@@ -59,10 +60,10 @@ class DataCleaning:
     def convert_product_weights(self, df):
         def convert_to_kg(value):
             try:
-                if str(value)[-2:] == 'kg':
+                if 'kg' in str(value):
                     kilograms = float(str(value).replace('kg', ''))
                     return kilograms
-                elif str(value)[-1] == 'g':
+                elif 'g' in str(value):
                     grams = float(str(value).replace('g', ''))
                     kilograms = grams / 1000
                     return kilograms
@@ -70,10 +71,24 @@ class DataCleaning:
                     milliliters = float(str(value).replace('ml', ''))
                     kilograms = milliliters / 1000
                     return kilograms
+                elif 'oz' in str(value):
+                    ounces = float(str(value).replace('oz',''))
+                    kilograms = ounces * 0.0283495
+                    return kilograms 
                 else:
                     return value
             except ValueError:
                 return value
+        def convert_value(value):
+            if 'x' in str(value) and str(value).endswith('g'):
+                parts = str(value).split('x')
+                num1 = int(parts[0])
+                num2 = int(parts[1][:-1])  # Remove the 'g' character
+                return f"{num1 * num2}g"
+            else:
+                return value
+        df['weight'] =  df['weight'].str.replace('[^a-zA-Z0-9]', '', regex=True)
+        df['weight'] = df['weight'].apply(convert_value)
         df['weight'] = df['weight'].apply(convert_to_kg)
         df.to_string('cleaned_productdata.csv')
         return df
