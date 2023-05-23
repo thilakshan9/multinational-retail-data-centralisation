@@ -13,14 +13,18 @@ class DataCleaning:
         # users['date_of_birth'] = users['date_of_birth'].str.extract(date_pattern, expand=False)
         # users = users[users['date_of_birth'].notnull()]
         # users= users[~users['date_of_birth'].isna()]
-        date_of_birth = pd.to_datetime(users['date_of_birth'], format='%Y-%m-%d',errors='coerce')
-        users['date_of_birth'] = date_of_birth.fillna(pd.to_datetime(users['date_of_birth'], format='%Y %B %d', errors='coerce'))
+        date_of_birth = pd.to_datetime(users['date_of_birth'],format='%Y-%m-%d', errors='coerce')
+        date_of_birth= date_of_birth.fillna(pd.to_datetime(users['date_of_birth'], format='%Y/%m/%d', errors='coerce'))
+        date_of_birth= date_of_birth.fillna(pd.to_datetime(users['date_of_birth'], format='%B %Y %d', errors='coerce'))
+        users['date_of_birth'] = date_of_birth.fillna(pd.to_datetime(users['date_of_birth'], format='%Y %B %d', errors='coerce'))        
         users = users.dropna(subset='date_of_birth')
         # users['date_of_birth'] = pd.to_datetime(users['date_of_birth'], format="%Y-%m-%d", errors='coerce')
         # users['join_date'] = users['join_date'].str.extract(date_pattern, expand=False)
         # users = users[users['join_date'].notnull()]
         # users = users.dropna(subset='join_date')
         join_date = pd.to_datetime(users['join_date'],format='%Y-%m-%d', errors='coerce')
+        join_date= join_date.fillna(pd.to_datetime(users['join_date'], format='%Y/%m/%d', errors='coerce'))
+        join_date= join_date.fillna(pd.to_datetime(users['join_date'], format='%B %Y %d', errors='coerce'))
         users['join_date'] = join_date.fillna(pd.to_datetime(users['join_date'], format='%Y %B %d', errors='coerce'))
         users = users.dropna(subset='join_date')
         users = users.reset_index(drop=True)
@@ -37,9 +41,15 @@ class DataCleaning:
         users.to_string('cleaned_users.txt')
         return users
     def clean_card_data(self, df):
+        df.to_string('unclean_card.txt')
         print(f"Total null values in the dataframe are : {df.isna().sum().sum()}")
+        df = df[~df.isna()]
         print(df['card_provider'].unique())
+        df=df[df['card_provider'].isin(['Diners Club / Carte Blanche','American Express','JCB 16 digit','JCB 15 digit','Maestro', 'Mastercard','Discover','VISA 19 digit', 'VISA 16 digit','VISA 13 digit'])]
         df['card_provider'] = df['card_provider'].astype('category')
+        df['card_number'] = df['card_number'].astype(str)
+        df['card_number'] = df['card_number'].str.replace('[^a-zA-Z0-9\s]', '', regex=True)
+        df.to_string('preclean_card.txt')
         df['card_number'] =  df['card_number'].astype(int)
         df['date_payment_confirmed'] = pd.to_datetime(df['date_payment_confirmed'], errors='coerce')
         df.to_string('clean_card.txt')
@@ -53,6 +63,7 @@ class DataCleaning:
         df['opening_date'].to_string('date.txt')
         opening_date = pd.to_datetime(df['opening_date'], format='%Y-%m-%d',errors='coerce')
         opening_date= opening_date.fillna(pd.to_datetime(df['opening_date'], format='%B %Y %d', errors='coerce'))
+        opening_date= opening_date.fillna(pd.to_datetime(df['opening_date'], format='%Y %B %d', errors='coerce'))
         df['opening_date']= opening_date.fillna(pd.to_datetime(df['opening_date'], format='%Y/%m/%d', errors='coerce'))
         df = df.dropna(subset='opening_date')
         df.to_string('cleaned_stores.txt')
@@ -95,10 +106,10 @@ class DataCleaning:
     def clean_products_data(self, df):
         print(df[df.duplicated(subset=['product_name','weight'], keep=False)])
         date_added= pd.to_datetime(df['date_added'], format='%Y-%m-%d',errors='coerce')
+        date_added= date_added.fillna(pd.to_datetime(df['date_added'], format='%Y/%m/%d', errors='coerce'))
+        date_added= date_added.fillna(pd.to_datetime(df['date_added'], format='%B %Y %d', errors='coerce'))
         df['date_added']= date_added.fillna(pd.to_datetime(df['date_added'], format='%Y %B %d', errors='coerce'))
         df = df.dropna(subset='date_added')
-        df = df.sort_values(by='date_added', ascending=True)
-        df = df.drop_duplicates(subset=['product_name','weight'], keep='first')
         df.to_string('cleaned_products.csv')
         return df
 

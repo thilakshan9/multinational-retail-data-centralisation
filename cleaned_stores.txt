@@ -120,6 +120,7 @@
 119    119                     Flat 1\nBeverley islands\nLake Sheila\nM8 1UU, Chapletown  53.46506  None            Chapletown   CH-FBB32B94            30   2011-06-18        Local    -1.47217           GB    Europe
 120    120                                         Knappering 09\n35944 Wertingen, Stade  53.59337  None                 Stade   ST-10F19C97            20   2001-11-28        Local     9.47629           DE    Europe
 121    121                      694 Parker Unions\nSouth Rebeccatown, GU 66824, Newburgh  41.50343  None              Newburgh   NE-C83B8B22            21   2014-07-03        Local   -74.01042           US   America
+122    122                            Studio 66K\nChloe road\nStanleyberg\nS0 6NE, Selby  53.78333  None                 Selby   SE-8DF6557B            20   2020-02-01        Local    -1.06667           GB    Europe
 123    123                            247 Melanie forge\nNorth Nathan\nN70 7ZZ, Surbiton  51.39148  None              Surbiton   SU-346D5CF2            31   2021-02-27        Local    -0.29825           GB    Europe
 124    124                                    22 Hussain rue\nBoothport\nM24 9LZ, Bushey  51.64316  None                Bushey   BU-784362E0           127   2015-12-13  Super Store    -0.36053           GB    Europe
 125    125                          Studio 45r\nWest falls\nTraceyfurt\nL7 9NA, Arbroath  56.56317  None              Arbroath   AR-0C5116E4            82   2008-09-01       Outlet    -2.58736           GB    Europe
@@ -186,6 +187,7 @@
 187    187                      Flat 18\nPhillips lane\nLynntown\nCF8H 8QU, Great Wyrley  52.66277  None          Great Wyrley   GR-18E26E0C            34   1999-11-19        Local    -2.01111           GB    Europe
 188    188                               295 Foster haven\nEdwardsfurt\nM4 8ZJ, Viewpark  55.82737  None              Viewpark   VI-B13ACF87            33   2000-08-02        Local     -4.0573           GB    Europe
 189    189                             Luka-Adolph-Platz 8/7\n49973 Halberstadt, Ehingen  48.28259  None               Ehingen   EH-945D8F25            81   2000-06-28  Super Store     9.72749           DE    Europe
+190    190                                 70 Ward center\nPort Nicola\nDT73 4WY, Bushey  51.64316  None                Bushey   BU-3FC2A064            25   2016-11-25        Local    -0.36053           GB    Europe
 191    191                             77 Eleanor fork\nWrightmouth\nFK9 4BH, Mexborough  53.49389  None            Mexborough   ME-C1AF27C3           130   2001-03-08  Super Store    -1.29243           GB    Europe
 192    192                             0 Mason islands\nLake Katyview\nL3U 0EX, Penzance  50.11861  None              Penzance   PE-52B1E131            25   2012-05-02        Local    -5.53715           GB    Europe
 193    193                   Studio 46\nJulia points\nNorth Gareth\nBL4P 4NS, Rutherglen  55.82885  None            Rutherglen   RU-BFF916C5           128   2001-05-23  Super Store    -4.21376           GB    Europe
@@ -285,6 +287,7 @@
 289    289                                      Faustring 1\n52133 Duderstadt, Memmingen  47.98372  None             Memmingen   ME-6529390A            78   2005-06-13       Outlet    10.18527           DE    Europe
 290    290                           Flat 07\nDawson mall\nEdwardston\nLE11 0TG, Newbury  51.40148  None               Newbury   NE-2B35DCBD            23   2011-08-20        Local    -1.32471           GB    Europe
 291    291                                    Buchholzallee 372\n93158 Bremen, Burscheid  51.08468  None             Burscheid   BU-90D457E0            40   2004-11-17        Local     7.11393           DE    Europe
+292    292                                     Löwerallee 49\n00561 Miltenberg, Landshut  48.52961  None              Landshut   LA-55069B69             6   2001-05-04   Mall Kiosk    12.16179           DE    Europe
 293    293                             Flat 0\nBilly hill\nHughstad\nG3B 0EL, Chapletown  53.46506  None            Chapletown   CH-DEF208AA             8   2022-02-25   Mall Kiosk    -1.47217           GB    Europe
 294    294                98501 Emily Field Suite 577\nWest Michael, IN 29247, Brunswick  43.91452  None             Brunswick   BR-CACF7508             7   2000-02-15   Mall Kiosk   -69.96533           US   America
 295    295           Flat 96s\nMichelle courts\nSouth Geraldside\nEX08 4PA, Great Wyrley  52.66277  None          Great Wyrley   GR-911A7DFC            66   2010-02-02       Outlet    -2.01111           GB    Europe
@@ -331,6 +334,7 @@
 337    337                                   6 John port\nNorth Amanda\nG6 2EU, Aberdeen  57.14369  None              Aberdeen   AB-D665986A            32   2002-07-21        Local    -2.09814           GB    Europe
 338    338                                Kata-Seifert-Gasse 241\n04496 Wetzlar, Bretten  49.03685  None               Bretten   BR-B7C294A7            77   2018-02-08       Outlet     8.70745           DE    Europe
 339    339                        Flat 5\nWard gardens\nNew Timothy\nSO9X 6NY, Lymington  50.75767  None             Lymington   LY-120579E6            34   1998-05-05        Local     -1.5443           GB    Europe
+340    340                         148 Samuel course\nNicolaside\nGY3E 5SD, Great Wyrley  52.66277  None          Great Wyrley   GR-250FBD0C            27   1994-11-24        Local    -2.01111           GB    Europe
 341    341                  Studio 8\nLydia groves\nNorth Hilarymouth\nIV4 6EJ, Southsea  50.79205  None              Southsea   SO-B5B9CB3B            97   2018-05-08  Super Store    -1.08593           GB    Europe
 342    342                         Mareile-Geißler-Straße 54\n41907 Lobenstein, Landshut  48.52961  None              Landshut   LA-6D1FE061            89   2017-10-24       Outlet    12.16179           DE    Europe
 343    343                                          Bruderstr. 1/5\n24745 Mayen, Bretten  49.03685  None               Bretten   BR-09D8DE69             5   1999-01-02   Mall Kiosk     8.70745           DE    Europe

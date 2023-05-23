@@ -14,8 +14,9 @@ class DataExtractor:
             users.to_string('uncleaned_users.txt')
             return users
     def retrieve_pdf_data(self,link):
-        dfs = tabula.read_pdf(link,pages='all',stream='True')[0]
-        return dfs
+        dfs = tabula.read_pdf(link, pages='all')
+        df = pd.concat(dfs)
+        return df
     def list_number_of_stores(self):
          api_dict = {'x-api-key':'yFBQbwXe9J3sd6zWVAMrK6lcxxr0q1lr2PT6DDMX'}
          api_fetch = requests.get('https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/number_stores',headers=api_dict)
