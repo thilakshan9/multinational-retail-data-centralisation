@@ -75,6 +75,13 @@ ALTER TABLE dim_store_details
 ### 4. Make changes to the dim_products table for the delivery team
 
 ```sql
+
+UPDATE dim_products
+SET product_price = REPLACE(product_price, '£', '')::numeric;
+
+ALTER TABLE dim_products
+ADD COLUMN weight_class VARCHAR(16);
+
 UPDATE dim_products
 SET weight_class = CASE
            WHEN CAST(weight AS FLOAT) < 2 THEN 'Light'
@@ -115,7 +122,7 @@ ALTER TABLE dim_products
 ALTER TABLE dim_products
     ALTER COLUMN weight_class TYPE VARCHAR(16);
 ALTER TABLE dim_products
-DROP COLUMN "Unnamed: 0”;
+DROP COLUMN "Unnamed: 0";
 ```
 
 ---
@@ -181,7 +188,7 @@ ALTER TABLE orders_table
 ADD CONSTRAINT fk_orders_table_card FOREIGN KEY (card_number) REFERENCES dim_card_details (card_number)
 
 ALTER TABLE orders_table
-ADD CONSTRAINT fk_orders_table_store FOREIGN KEY (store_code) REFERENCES dim_store_detials (store_code)
+ADD CONSTRAINT fk_orders_table_store FOREIGN KEY (store_code) REFERENCES dim_store_details (store_code)
 
 ALTER TABLE orders_table
 ADD CONSTRAINT fk_orders_table_product FOREIGN KEY (product_code) REFERENCES dim_products (product_code)
