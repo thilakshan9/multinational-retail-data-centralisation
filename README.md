@@ -1,5 +1,5 @@
-#### - See DatabaseSchema.md for creating database schema
-#### - See SQLQueries.md for database querying
+#### - See DatabaseSchema.md for creating database schema [DatabaseScheme](DatabaseSchema.md)
+#### - See SQLQueries.md for database querying [SQLQueries](SQLQueries.md)
  ---
 ## Data cleaning 
 Infer_datetime_format had been removed in the latest pandas and I decided to stick with the new version instead of reverting as there was some new functianlities that I was making use of. This resulted in me running the to_datetime method multiple times with different formats. Null values and duplicates were always the first ones to be checked. I saved the unclean data to a new file and the clean data to another new file to compare the two datasets. This was to see whether my expected cleaning had taken place and look for room for improvements.The terminal was not printing the pandas dataframe as extensively and this was an amazing way to see what I was doing. Working with tabula for pdf reading took a couple tries but we got there at the end and boto3 was pretty smooth due to having past experience with it.
