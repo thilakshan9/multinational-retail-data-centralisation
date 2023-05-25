@@ -30,11 +30,7 @@ class DataExtractor:
               api_fetch = requests.get(f'https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/store_details/{i}', headers=api_dict)
               api_fetch_list.append(api_fetch.json())
          api_df = pd.DataFrame(api_fetch_list)
-         print(api_df)
          return api_df
-        #  api_df = pd.json_normalize(api_json)
-        #  print(api_df)
-        #  return api_df
     def extractfroms3(self):
          BUCKET_NAME = 'data-handling-public'
          KEY = 'products.csv'
@@ -48,13 +44,4 @@ class DataExtractor:
          return pd.DataFrame(api_fetch.json())
          
          
-obj_1 = DataExtractor()
-# data  = obj_1.retrieve_pdf_data('https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details.pdf')
-# num_stores = obj_1.list_number_of_stores()
-# stores_data = obj_1.retrieve_stores_data('https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/store_details/')
-# stores_data.to_string('cleaning_stores.txt')
-# print(data)
-# data.to_string('asdasd.txt')
-print(obj_1.list_number_of_stores())
-obj_1.extractfroms3()
 
