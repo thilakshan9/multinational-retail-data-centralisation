@@ -1,4 +1,4 @@
-#### - See DatabaseSchema for creating database schema
+#### - See DatabaseSchema.md for creating database schema
 #### - See SQLQueries.md for database querying
  ---
 ## Data cleaning 
